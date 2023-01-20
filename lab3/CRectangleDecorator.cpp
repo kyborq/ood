@@ -5,7 +5,7 @@ CRectangleDecorator::CRectangleDecorator(sf::Shape* shape) : m_rectangle(shape)
 {
 }
 
-float CRectangleDecorator::GetArea()
+float CRectangleDecorator::GetArea() const
 {
 	sf::RectangleShape* rectangle = static_cast<sf::RectangleShape*>(m_rectangle);
 
@@ -15,7 +15,7 @@ float CRectangleDecorator::GetArea()
 	return x * y;
 }
 
-float CRectangleDecorator::GetPerimeter()
+float CRectangleDecorator::GetPerimeter() const
 {
 	sf::RectangleShape* rectangle = static_cast<sf::RectangleShape*>(m_rectangle);
 
@@ -23,6 +23,11 @@ float CRectangleDecorator::GetPerimeter()
 	float y = rectangle->getSize().y;
 
 	return x * 2 + y * 2;
+}
+
+std::string CRectangleDecorator::Accept(IVisitor& visitor) const
+{
+	visitor.VisitShape(*this);
 }
 
 void CRectangleDecorator::Display(sf::RenderWindow& window) const

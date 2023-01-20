@@ -9,6 +9,7 @@
 #include "CRectangleCreator.h"
 #include "CTriangleCreator.h"
 #include "CCircleCreator.h"
+#include "CShapeVisitor.h"
 
 const std::string TRIANGLE_REGEX = "TRIANGLE: P1=(.+),(.+); P2=(.+),(.+); P3:(.+),(.+)";
 const std::string RECTANGLE_REGEX = "RECTANGLE: P1=(.+),(.+); P2=(.+),(.+)";
@@ -76,10 +77,15 @@ void CShapeProcess::ReadShapes()
 
 void CShapeProcess::WriteResults()
 {
-    for (auto shape : this->m_shapes)
-    {
-        this->m_output << shape->ToString() << std::endl;
-    }
+    // for (auto shape : this->m_shapes)
+    // {
+    //     this->m_output << shape->ToString() << std::endl;
+    // }
+    CShapeVisitor visitor;
+	for (const auto& shape : m_shapes)
+	{
+		m_output << shape->Accept(visitor) << std::endl;
+	}
 }
 
 void CShapeProcess::DisplayShapes()

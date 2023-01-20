@@ -10,7 +10,7 @@ CTriangleDecorator::CTriangleDecorator(sf::Shape* shape) : m_triangle(shape)
 {
 }
 
-float CTriangleDecorator::GetArea()
+float CTriangleDecorator::GetArea() const
 {
 	sf::ConvexShape* triangle = static_cast<sf::ConvexShape*>(m_triangle);
 
@@ -24,7 +24,7 @@ float CTriangleDecorator::GetArea()
 	return area;
 }
 
-float CTriangleDecorator::GetPerimeter()
+float CTriangleDecorator::GetPerimeter() const
 {
 	sf::ConvexShape* triangle = static_cast<sf::ConvexShape*>(m_triangle);
 
@@ -39,6 +39,11 @@ float CTriangleDecorator::GetPerimeter()
 	float perimeter = ab + ac + bc;
 
 	return perimeter;
+}
+
+std::string CTriangleDecorator::Accept(IVisitor& visitor) const
+{
+	visitor.VisitShape(*this);
 }
 
 void CTriangleDecorator::Display(sf::RenderWindow& window) const

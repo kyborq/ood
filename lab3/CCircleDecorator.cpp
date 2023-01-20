@@ -6,7 +6,7 @@ CCircleDecorator::CCircleDecorator(sf::Shape* shape) : m_circle(shape)
 {
 }
 
-float CCircleDecorator::GetArea()
+float CCircleDecorator::GetArea() const
 {
 	sf::CircleShape* circle = static_cast<sf::CircleShape*>(m_circle);
 	
@@ -16,7 +16,12 @@ float CCircleDecorator::GetArea()
 	return area;
 }
 
-float CCircleDecorator::GetPerimeter()
+std::string CCircleDecorator::Accept(IVisitor& visitor) const
+{
+	visitor.VisitShape(*this);
+}
+
+float CCircleDecorator::GetPerimeter() const
 {
 	sf::CircleShape* circle = static_cast<sf::CircleShape*>(m_circle);
 
@@ -39,3 +44,4 @@ std::string CCircleDecorator::ToString()
 
 	return strm.str();
 }
+

@@ -1,9 +1,14 @@
-﻿// lab2.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include <string>
 
-#include <iostream>
+#include "CShapeProcess.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    CShapeProcess shapeProcess = CShapeProcess("input.txt", "output.txt");
+
+    shapeProcess.ReadShapes();
+    shapeProcess.WriteResults();
+    shapeProcess.DisplayShapes();
+
+    return 0;
 }
